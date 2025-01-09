@@ -5,11 +5,6 @@ when:
     exclude: [test/1.0.0, test/1.1.*]
 
 steps:
-  clone:
-    image: woodpeckerci/plugin-git
-    settings:
-      depth: 50
-
   run-two:
     image: busybox
     commands:
@@ -17,12 +12,11 @@ steps:
 
   run-one:
     image: busybox
-    depends_on: [clone, run-two]
+    depends_on: [run-two]
     commands:
       - echo "first run"
 
   run-three:
     image: ubuntu
-    depends_on: [clone]
     commands:
-      - echo "hi"
+      - echo hi
