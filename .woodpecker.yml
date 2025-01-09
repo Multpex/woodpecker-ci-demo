@@ -18,5 +18,5 @@ pipeline:
 
 when:
   branch:
-    include: [ master, release/* ]
+    include: [ main, release/* ]
     exclude: [ test/1.0.0, test/1.1.* ]
