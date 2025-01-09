@@ -1,13 +1,20 @@
+# Pipeline-level event filter
+when:
+  event: [push, pull_request]
+  branch:
+    include: [ main, release/* ]
+    exclude: [ test/1.0.0, test/1.1.* ]
+
 steps:
   run-one:
     image: busybox
-    depends: first
+    depends_on: [first]
     commands:
       - echo "first run"
       
   run-two:
     image: busybox
-    group: first
+    depends_on: [first]
     commands:
       - echo "second run"
 
@@ -15,8 +22,3 @@ steps:
     image: ubuntu
     commands:
       - echo hi
-
-when:
-  branch:
-    include: [ main, release/* ]
-    exclude: [ test/1.0.0, test/1.1.* ]
